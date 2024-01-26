@@ -94,3 +94,6 @@ form.addEventListener('submit', addTransaction);
 
 // Initialize the application
 Init();
+
+//toggle js
+

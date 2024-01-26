@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+</head>
+<body>
+    <div class="loan-calculator">
+        <div class="top">
+            <h2>Compound Interest Calculator</h2>
+            <form class="group-form">
+                <div class="group">
+                    <div class="title">Initial Amount</div>
+                    <input type="number" id="initialamount" />
+                </div>
+                <div class="group">
+                    <div class="title">Investment Years</div>
+                    <input type="number" id="years" />
+                </div>
+                <div class="group">
+                    <div class="title">Estimated Rates(%)</div>
+                    <input type="number" id="rates" />
+                </div>
+                <div class="group">
+                    <div class="title">Compound Interval</div>
+                    <select id="compound">
+                        <option value="1">Annualy</option>
+                        <option value="4">Quartely</option>
+                        <option value="2">Semiannualy</option>
+                        <option value="12">Monthly</option>
+                    </select>
+                </div>
+                <button onclick="calculateGrowth()">Calculate Growth</button>
+            </form>
+        </div>
+        <div class="result">
+            <div class="left">
+                <div class="loan-emi">
+                    <h3>Compound Interest</h3>
+                    <div class="value" id="message"></div>
+                </div>
+            </div>
+            <div class="right">
+                <canvas id="data-set"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="js/interest.js"></script>
+</body>
+</html>
