@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/initialform.css">
+
+<title>Income Declaration Form</title>
+</head>
+<body>
+
+<div class="initial-form-container">
+    <h2>Income Declaration Form</h2>
+    <label for="numIncomes">Number of Income Sources:</label>
+    <input type="number" id="numIncomes" min="1" max="100" required>
+    <div id="incomeFields">
+        <div id="incomeContainer"></div>
+    </div>
+    <!-- Added portion -->
+    <label for="monthlyExpenses">Monthly Expense:</label>
+    <input type="number" id="monthlyExpenses" min="0" placeholder="Enter Monthly Expenses" required />
+    <!-- End of added portion -->
+    <label for="saving">Saving Goal (Percentage):</label>
+    <input type="number" id="saving" min="1" max="100" placeholder="Enter Saving Goal in %" required />
+    <button type="button" onclick="generateIncomeFields()">Next</button>
+    <button id="submitButton" onclick="submitForm()">Submit</button>
+</div>
+
+<script>
+    function generateIncomeFields() {
+        var numIncomes = parseInt(document.getElementById("numIncomes").value);
+        var incomeContainer = document.getElementById("incomeContainer");
+        incomeContainer.innerHTML = "";
+        for (var i = 1; i <= numIncomes; i++) {
+            incomeContainer.innerHTML += `
+            <div>
+                <label for="incomeSource${i}">Income Source ${i}:</label>
+                <input type="text" id="incomeSource${i}" name="incomeSource${i}" required>
+                <label for="incomeAmount${i}">Income Amount ${i}:</label>
+                <input type="text" id="incomeAmount${i}" name="incomeAmount${i}" required>
+            </div>
+            `;
+        }
+        document.getElementById("incomeFields").style.display = "block";
+        document.getElementById("submitButton").style.display = "block";
+    }
+
+    function submitForm() {
+        var numIncomes = parseInt(document.getElementById("numIncomes").value);
+        var formData = {};
+        for (var i = 1; i <= numIncomes; i++) {
+            formData["incomeSource" + i] = document.getElementById("incomeSource" + i).value;
+            formData["incomeAmount" + i] = document.getElementById("incomeAmount" + i).value;
+        }
+        console.log(formData); // You can modify this to send the form data to your backend or handle it as needed
+    }
+</script>
+
+</body>
+</html>
