@@ -154,6 +154,8 @@ const balance = document.getElementById(
   }
 
   function submitForm(event) {
+     // Prevent the default form submission behavior
+     event.preventDefault();
       var numIncomes = parseInt(document.getElementById("numIncomes").value);
       var allFieldsFilled = true;
 
@@ -168,6 +170,7 @@ const balance = document.getElementById(
       }
 
       if (allFieldsFilled) {
+       
           // Show the main content and header
           document.querySelector(".header-main").style.display = "block";
           document.querySelector(".main-content").style.display = "block";
@@ -177,19 +180,19 @@ const balance = document.getElementById(
           formSubmitted = true;
 
           // Show the popup
-          document.getElementById("popup").classList.add("show");
+          document.getElementById("popupContainer").classList.add("show");
       } else {
           alert("Please fill in all income details before submitting.");
       }
 
-      // Prevent the default form submission behavior
-      event.preventDefault();
+      
   }
 
   document.getElementById("initial-form").addEventListener("submit", submitForm);
 
   function closePopup() {
-  document.getElementById("popup").classList.remove("show");
+  document.getElementById("popupContainer").classList.remove("show");
+
 }
 
 // Function to add initial form details as transactions
@@ -240,6 +243,8 @@ function updateValues() {
 
 // Function to submit the form and add initial form details as transactions
 function submitForm(event) {
+  // Prevent the default form submission behavior
+  event.preventDefault();
     var numIncomes = parseInt(document.getElementById("numIncomes").value);
     var allFieldsFilled = true;
 
@@ -266,7 +271,7 @@ function submitForm(event) {
         formSubmitted = true;
 
         // Show the popup
-        document.getElementById("popup").classList.add("show");
+        document.getElementById("popupContainer").classList.add("show");
 
         // Update balance, income, and expense
         updateValues();
@@ -275,6 +280,5 @@ function submitForm(event) {
         alert("Please fill in all income details before submitting.");
     }
 
-    // Prevent the default form submission behavior
-    event.preventDefault();
+    
 }
