@@ -132,6 +132,10 @@ const balance = document.getElementById(
   Init();
   
   form.addEventListener('submit',addTransaction);
+
+  // Add event listener to the "Add transaction" button
+document.querySelector('.btn-add').addEventListener('click', addTransaction);
+
   let formSubmitted = false;
 
   function generateIncomeFields() {

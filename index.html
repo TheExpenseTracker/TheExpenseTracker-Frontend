@@ -80,19 +80,20 @@
                         
                           <a class="divider">|</a>
                         <button>
-                            <a class="faq-text">FAQ</a>
+                            <a class="faq-text" href="FAQ.html">FAQ</a>
                         </button>
                         <a class="divider">|</a>
+                      <!-- logout added -->
                         <button>
-                            <a class="login-text">Login</a>
+                            <a class="login-text">Logout</a>
                         </button>
                         <a class="divider">|</a>
-                        <button>
+                        <!-- <button>
                             <a class="signup-text">SignUp</a>
                         </button>
                         <button class="lang-button">
                             <ion-icon name="globe-outline" class="globe-oulines"></ion-icon>
-                        </button>
+                        </button> -->
                         <div class="language-container">
                             <a class="EN">Settings</a>
                             <a class="down-arrow">⌄</a>
@@ -130,7 +131,8 @@
       <div class="popup" id="popup">
           <img src="assets/tick.png" />
           <h2>Thank You!</h2>
-          <p>Your details have been successfully submitted. Thanks</p>
+          <p>Your details have been successfully submitted. Your saving amount is: <span id="popupSavingAmount"></span></p>
+
           <button type="button" onclick="closePopup()">OK</button>
       </div>
   </div>
@@ -185,7 +187,7 @@
               ><button class="delete-btn">x</button>
             </li> -->
         </ul>
-        <h3>Add New Transition</h3>
+        <h3>Add New Transaction</h3>
         <form id="form">
             <div class="form-control">
                 <label for="text">Text</label>
