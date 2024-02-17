@@ -169,24 +169,43 @@
         
         <button type="submit">Set Alert</button>
     </form>
+    
+    <h2>Set EMI Details</h2>
+    <form id="emiForm">
+        <label for="emiDate" style="color: #107d71;">EMI Date:</label>
+        <input type="date" id="emiDate" name="emiDate" required placeholder="Select EMI date"><br><br>
+    
+        <label for="frequency" style="color: #107d71;">Frequency:</label>
+        <select id="frequency" name="frequency">
+            <option value="annual">Annual</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="semi-annual">Semi-Annual</option>
+        </select><br><br>
+        
+        <button type="submit">Set EMI Alert</button>
+    </form>
+    
 
     <script>
         document.getElementById("alertForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-            
-            // Get the values entered by the user
+            event.preventDefault();
             var alertDate = document.getElementById("alertDate").value;
             var alertMessage = document.getElementById("alertMessage").value;
-    
-            // You can do further processing here, such as storing the values in a database or displaying them
-            // For now, let's just log them to the console
             console.log("Date: " + alertDate);
             console.log("Alert Message: " + alertMessage);
-    
-            // Optionally, you can clear the form after submission
             document.getElementById("alertForm").reset();
         });
+    
+        document.getElementById("emiForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var emiDate = document.getElementById("emiDate").value;
+            var frequency = document.getElementById("frequency").value;
+            console.log("EMI Date: " + emiDate);
+            console.log("Frequency: " + frequency);
+            document.getElementById("emiForm").reset();
+        });
     </script>
+    
 
 </body>
 
