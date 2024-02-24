@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/popup.css">
+     <!-- Vendor CSS Files -->
+  
+  <link href="assets/vendor/chart.js/chart.umd.js" rel="stylesheet">
+
+
     <style>
         body {
             margin: 0;
@@ -179,7 +184,8 @@
                 </p>
             </div>
         </div>
-    
+       <div class="hischart">
+        <div class="his">
         <h3>History</h3>
         <ul id="list" class="list">
             <!-- <li class="minus">
@@ -187,6 +193,50 @@
               ><button class="delete-btn">x</button>
             </li> -->
         </ul>
+    </div>
+        <main id="main" class="main">
+
+            <section class="section">
+              <div class="row">
+        
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Line Chart</h5>
+        
+                      <!-- Line Chart -->
+                      <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                      <!-- End Line Chart -->
+        
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="col-lg-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Income and Expense</h5>
+        
+                      <!-- Input fields for income and expense -->
+                      <div class="mb-3">
+                        <label for="income" class="form-label">Income:</label>
+                        <input type="number" class="form-control" id="income" value="">
+                      </div>
+                      <div class="mb-3">
+                        <label for="expense" class="form-label">Expense:</label>
+                        <input type="number" class="form-control" id="expense" value="">
+                      </div>
+                      <!-- End Input fields for income and expense -->
+        
+                    </div>
+                  </div>
+                </div>
+        
+              </div>
+            </section>
+        
+          </main><!-- End #main -->
+          </div>
         <h3>Add New Transaction</h3>
         <form id="form">
             <div class="form-control">
@@ -200,8 +250,76 @@
             <button type="button" class="btn-add">Add transaction</button>
 
         </form>
+       
+        
     </div>
     </div>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const incomeInput = document.getElementById('income');
+      const expenseInput = document.getElementById('expense');
+
+      // Retrieve previous values from localStorage
+      const previousIncome = localStorage.getItem('income');
+      const previousExpense = localStorage.getItem('expense');
+
+      // Set the input values to the previous values, if available
+      incomeInput.value = previousIncome ? previousIncome : '';
+      expenseInput.value = previousExpense ? previousExpense : '';
+
+      const lineChart = new Chart(document.querySelector('#lineChart'), {
+        type: 'line',
+        data: {
+          labels: ['Income', 'Expense'],
+          datasets: [
+            {
+              label: 'January',
+              data: [incomeInput.value || 0, expenseInput.value || 0],
+              fill: false,
+              borderColor: 'rgb(54, 162, 235)',
+              tension: 0.1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+      // Event listener to update chart when inputs change
+      incomeInput.addEventListener('input', updateChart);
+      expenseInput.addEventListener('input', updateChart);
+
+      function updateChart() {
+        // Save the current values to localStorage
+        localStorage.setItem('income', incomeInput.value);
+        localStorage.setItem('expense', expenseInput.value);
+
+        // Update the chart data and color
+        const income = incomeInput.value || 0;
+        const expense = expenseInput.value || 0;
+        lineChart.data.datasets[0].data = [income, expense];
+        lineChart.data.datasets[0].borderColor = getLineColor(income, expense);
+
+        // Update the chart
+        lineChart.update();
+      }
+
+      function getLineColor(income, expense) {
+        return parseInt(expense) > parseInt(income) ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)';
+      }
+    });
+  </script>
    
 
 <script src="js/script.js"></script>
