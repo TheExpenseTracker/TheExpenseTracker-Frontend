@@ -141,25 +141,31 @@
           <button type="button" onclick="closePopup()">OK</button>
       </div>
   </div>
-    <div class="initial-form-container">
-        <img class="logo" src="assets/logo.png">
-        <h2>Welcome to Money Minder! Let's set up your initial details.</h2>
+  <div class="initial-form-container">
+    <img class="logo" src="assets/logo.png">
+    <h2>Welcome to Money Minder! Let's set up your initial details.</h2>
+    <div id="incomeFields">
         <form id="initial-form">
             <label for="numIncomes">Number of Income Sources:</label>
             <input type="number" id="numIncomes" min="1" max="100" required>
-            <div id="incomeFields">
-                <div id="incomeContainer"></div>
-            </div>
+            <div id="incomeContainer"></div>
 
             <label for="monthlyExpenses">Monthly Expense:</label>
             <input type="number" id="monthlyExpenses" min="0" placeholder="Enter Monthly Expenses" required />
-            <!-- End of added portion -->
+
             <label for="saving">Saving Goal (Percentage):</label>
             <input type="number" id="saving" min="1" max="100" placeholder="Enter Saving Goal in %" required />
+
+            <!-- Date input field -->
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" required />
+
             <button type="button" id="nextButton" onclick="generateIncomeFields()">Next</button>
             <button id="submitButton" style="display: none;" onclick="submitForm()">Submit</button>
         </form>
     </div>
+</div>
+
     <div class="main-content">
       <div class="container">
         <h4>Your Balance</h4>
@@ -239,18 +245,22 @@
           </div>
         <h3>Add New Transaction</h3>
         <form id="form">
-            <div class="form-control">
-                <label for="text">Text</label>
-                <input type="text" id="text" placeholder="Enter Text...."/>
-            </div>
-            <div class="form-control">
-                <label for="amount">Amount <br> (negative - expense ,positive - income )</label>
-                <input type="number" id="amount" placeholder="Enter amount..."> 
-            </div>
-            <button type="button" class="btn-add">Add transaction</button>
-
-        </form>
-       
+          <div class="form-control">
+              <label for="text">Text</label>
+              <input type="text" id="text" placeholder="Enter Text...."/>
+          </div>
+          <div class="form-control">
+              <label for="amount">Amount <br> (negative - expense, positive - income)</label>
+              <input type="number" id="amount" placeholder="Enter amount..."> 
+          </div>
+          <!-- New date input field -->
+          <div class="form-control">
+              <label for="date">Date</label>
+              <input type="date" id="date">
+          </div>
+          <button type="button" class="btn-add">Add transaction</button>
+      </form>
+      
         
     </div>
     </div>
@@ -319,6 +329,9 @@
         return parseInt(expense) > parseInt(income) ? 'rgb(255, 99, 132)' : 'rgb(54, 162, 235)';
       }
     });
+
+ 
+   
   </script>
    
 

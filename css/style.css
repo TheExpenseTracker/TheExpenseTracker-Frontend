@@ -49,6 +49,7 @@ body {
 
 #initial-form button:hover {
   background-color: #45a049; /* Darker green color on hover */
+  
 }
 
 .logo {
@@ -125,7 +126,7 @@ label {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],input[type="date"] {
   border: 1px solid #dedede;
   border-radius: 2px;
   display: block;

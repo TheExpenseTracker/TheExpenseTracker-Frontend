@@ -182,6 +182,7 @@ document.querySelector('.btn-add').addEventListener('click', addTransaction);
 
           // Set formSubmitted to true
           formSubmitted = true;
+          
 
           // Show the popup
           document.getElementById("popupContainer").classList.add("show");
