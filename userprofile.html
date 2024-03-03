@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .profile-details {
+      text-align: center;
+    }
+    .profile-details h1 {
+      margin: 0;
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .detail-box {
+      background-color: #ace7b9;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .detail-box p {
+      margin: 0;
+      color: #555;
+      font-size: 16px;
+    }
+    .detail-box input {
+      width: calc(100% - 30px); /* Consider padding */
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      color: #333;
+    }
+    .detail-box input:focus {
+      outline: none;
+    }
+    .edit-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #007bff;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .edit-icon:hover {
+      color: #0056b3;
+    }
+    .back-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="back-button" onclick="window.history.back()">Back</button>
+    <label for="profile-picture-input">
+      <img src="profile-picture.jpg" alt="Profile Picture" class="profile-picture" id="profile-picture">
+    </label>
+    <input type="file" id="profile-picture-input" style="display: none;" accept="image/*">
+    <div class="profile-details">
+      <h1>User Name</h1>
+      <div class="detail-box" id="emailBox" onclick="makeEditable('email')"> <!-- Added ID -->
+        <p>Email: <span id="email">user@example.com</span> <i class="fas fa-edit edit-icon" onclick="makeEditable('email')"></i></p>
+      </div>
+      <div class="detail-box" id="locationBox" onclick="makeEditable('location')"> <!-- Added ID -->
+        <p>Location: <span id="location">City, Country</span> <i class="fas fa-edit edit-icon" onclick="makeEditable('location')"></i></p>
+      </div>
+      <div class="detail-box" id="ageBox" onclick="makeEditable('age')"> <!-- Added ID -->
+        <p>Age: <span id="age">25</span> <i class="fas fa-edit edit-icon" onclick="makeEditable('age')"></i></p>
+      </div>
+      <div class="detail-box" id="incomeBox" onclick="makeEditable('income')"> <!-- Added ID -->
+        <p>Total Income: <span id="income">Rs 5000</span> <i class="fas fa-edit edit-icon" onclick="makeEditable('income')"></i></p>
+      </div>
+      <div class="detail-box" id="expenseBox" onclick="makeEditable('expense')"> <!-- Added ID -->
+        <p>Monthly Expense: <span id="expense">Rs 2000</span> <i class="fas fa-edit edit-icon" onclick="makeEditable('expense')"></i></p>
+      </div>
+      <div class="detail-box" id="savingGoalBox" onclick="makeEditable('savingGoal')"> <!-- Added ID -->
+        <p>Saving Goal: <span id="savingGoal">Rs 10000</span> <i class="fas fa-edit edit-icon" onclick="makeEditable('savingGoal')"></i></p>
+      </div>
+      <div class="detail-box" id="aboutBox" onclick="makeEditable('about')"> <!-- Added ID -->
+        <p>About: <span id="about">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et lorem aliquet, vehicula nunc id, dapibus sapien. Nullam facilisis risus nec eleifend.</span> <i class="fas fa-edit edit-icon" onclick="makeEditable('about')"></i></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('profile-picture-input').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          document.getElementById('profile-picture').src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function makeEditable(id) {
+      const element = document.getElementById(id);
+      const currentValue = element.textContent;
+
+      // Create an input element
+      const input = document.createElement('input');
+      input.value = currentValue;
+
+      // Replace the span with the input element
+      element.innerHTML = ''; // Clear existing content
+      element.appendChild(input);
+
+      // Focus the input element
+      input.focus();
+
+      // Add event listener to save changes when pressing Enter
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const newValue = input.value;
+          saveData(id, newValue);
+          // Replace the input element with a new span containing the updated value
+          const newSpan = document.createElement('span');
+          newSpan.textContent = newValue;
+          element.innerHTML = ''; // Clear existing content
+          element.appendChild(newSpan);
+          // Re-enable editing on the box
+          element.onclick = function() {
+            makeEditable(id);
+          };
+        }
+      });
+
+      // Disable editing on this box while editing
+      element.onclick = null;
+    }
+
+    function saveData(key, value) {
+      // Here you can implement saving data to localStorage or any backend
+      // For demonstration purpose, let's just log the data
+      console.log("Saving data:", key, value);
+    }
+  </script>
+</body>
+</html>
